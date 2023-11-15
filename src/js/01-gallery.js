@@ -3,20 +3,23 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 const gallery = document.querySelector("ul.gallery");
+const image = document.querySelector(".gallery_item");
 
 gallery.addEventListener("click", (event) => {
-  event.preventDefault();
-  const lightbox = basicLightbox
-    .create(
-      `<img src="${event.target.dataset.source}" width="1800" height="1600" />`
-    )
-    .show((lightboxInstance) => {
-      document.addEventListener("keydown", (key_event) => {
-        if (key_event.key == "Escape") {
-          lightboxInstance.close();
-        }
+  if (event.target.className == "gallery__image") {
+    event.preventDefault();
+    const lightbox = basicLightbox
+      .create(
+        `<img src="${event.target.dataset.source}" width="1800" height="1600" />`
+      )
+      .show((lightboxInstance) => {
+        document.addEventListener("keydown", (key_event) => {
+          if (key_event.key == "Escape") {
+            lightboxInstance.close();
+          }
+        });
       });
-    });
+  }
 });
 
 const images = galleryItems.map((item) => {
